@@ -15,10 +15,10 @@ router.get('/', async (req, res) => {
 
         let expenses = Expense.find(query);
 
-        if (sort === 'date_desc') {
-            expenses = expenses.sort({ date: -1 });
+        if (sort === 'date_asc') {
+            expenses = expenses.sort({ date: 1 });
         } else {
-            // Default sort by date descending as per requirements
+            // Default sort by date descending (date_desc or undefined)
             expenses = expenses.sort({ date: -1 });
         }
 
