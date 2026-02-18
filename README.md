@@ -92,3 +92,24 @@ sequenceDiagram
 - **Complex State Management**: Used React local state (`useState`, `useEffect`) instead of Redux or Context API. The app's state is simple enough that prop drilling is minimal and manageable.
 - **Comprehensive Testing**: While manual verification and a backend script were used, a full suite of unit/integration tests (Jest/Cypress) was omitted due to time constraints.
 - **Input Validation**: Basic validation exists, but deep data sanitization and schema validation (using Zod/Joi) were kept minimal.
+
+## Deployment
+
+### Vercel Deployment Schema
+The project is configured to deploy both frontend and backend to Vercel as a monorepo.
+- **Frontend**: Vite app (static assets)
+- **Backend**: Express app (Serverless Functions)
+
+### Steps to Deploy
+1.  **Database**: Create a MongoDB Atlas cluster and get the connection string (URI).
+2.  **Push to GitHub**: Ensure your latest code is on GitHub.
+3.  **Import to Vercel**:
+    - Go to Vercel Dashboard -> Add New -> Project.
+    - Import your GitHub repository.
+    - Framework Preset: **Vite** (Vercel should detect it).
+    - **Root Directory**: Leave as `./` (Project Root).
+4.  **Environment Variables**:
+    - Add `MONGO_URI`: Your MongoDB Atlas connection string.
+    - Add `VITE_API_URL`: Set this to `/api` (or your full production URL if different).
+5.  **Deploy**: Click Deploy.
+

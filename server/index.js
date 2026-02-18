@@ -23,6 +23,12 @@ app.get('/', (req, res) => {
     res.send('Expense Tracker API is running');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Export the Express API
+module.exports = app;
+
+// Only start the server if we aren't being imported (e.g. by Vercel)
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-const API_URL = 'http://localhost:5000/expenses';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/expenses';
 
 const api = axios.create({
     baseURL: API_URL,
