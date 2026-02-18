@@ -30,6 +30,46 @@ npm start
 
 ---
 
+## Architecture
+
+The application follows a standard Client-Server architecture:
+
+```mermaid
+graph LR
+    User[User] -->|Interacts| Client[Frontend (React/Vite)]
+    Client -->|HTTP Requests| Server[Backend API (Express)]
+    Server -->|Mongoose| DB[(MongoDB)]
+```
+
+## Application Flow
+
+### Adding an Expense
+The following sequence describes how data flows when a user adds a new expense:
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Client as Frontend (React)
+    participant Server as Backend (Express)
+    participant DB as MongoDB
+
+    User->>Client: Enters Amount, Category, Description
+    User->>Client: Clicks "Add Expense"
+    Client->>Server: POST /expenses (JSON Body)
+    Note over Server: Validates Data
+    Server->>DB: Create Document
+    DB-->>Server: Return Saved Document
+    Server-->>Client: 201 Created (JSON)
+    Client-->>User: Show Success Message
+    Client->>Server: GET /expenses (Refresh List)
+    Server->>DB: Find All Expenses (Sorted)
+    DB-->>Server: Return List
+    Server-->>Client: 200 OK (JSON List)
+    Client-->>User: Updates Expense Table
+```
+
+---
+
 ## Design Decisions & Trade-offs
 
 ### 1. Database Choice: MongoDB
