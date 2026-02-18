@@ -16,7 +16,8 @@ A minimal full-stack expense tracker application built with the **MERN** stack (
 2. Install dependencies:
    ```bash
    npm install
-   cd server && npm install
+   npm install
+   cd api && npm install
    cd client && npm install
    ```
 
@@ -98,7 +99,7 @@ sequenceDiagram
 ### Vercel Deployment Schema
 The project is configured to deploy both frontend and backend to Vercel as a monorepo.
 - **Frontend**: Vite app (static assets)
-- **Backend**: Express app (Serverless Functions)
+- **Backend**: Express app (Serverless Functions in `api/`)
 
 ### Steps to Deploy
 1.  **Database**: Create a MongoDB Atlas cluster and get the connection string (URI).
@@ -106,8 +107,10 @@ The project is configured to deploy both frontend and backend to Vercel as a mon
 3.  **Import to Vercel**:
     - Go to Vercel Dashboard -> Add New -> Project.
     - Import your GitHub repository.
-    - Framework Preset: **Vite** (Vercel should detect it).
+    - **Framework Preset**: Vite.
     - **Root Directory**: Leave as `./` (Project Root).
+    - **Build Command**: `npm run build` (This runs the root build script which builds the client).
+    - **Output Directory**: `client/dist`
 4.  **Environment Variables**:
     - Add `MONGO_URI`: Your MongoDB Atlas connection string.
     - Add `VITE_API_URL`: Set this to `/api` (or your full production URL if different).

@@ -4,10 +4,11 @@
     "description": "Full stack expense tracker",
     "scripts": {
         "start": "concurrently \"npm run server\" \"npm run client\"",
-        "server": "cd server && npm start",
+        "server": "cd api && npm start",
         "client": "cd client && npm run dev",
+        "build": "cd client && npm install && npm run build",
         "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
-        "server:dev": "cd server && npm run dev",
+        "server:dev": "cd api && npm run dev",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
